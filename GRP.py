@@ -8,6 +8,19 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.layers.experimental import preprocessing
 
+def AAAAA(list):
+  row = 0
+  for data in list:
+    if(data == ''):
+      data = -1
+      list[row] = -1
+    else:
+      try:
+        list[row] = int(data)
+      except:
+        list[row] = float(data)
+    row+=1
+
 dates = []           # Date
 times = []           # Time (EST)
 discharge = []       # Rate of Discharge (FT^3/s)
@@ -42,6 +55,17 @@ for time in times:
     hour.append(int(time[0:2]))
     minute.append(int(time[3:]))
 
+AAAAA(discharge)
+AAAAA(temperature)
+AAAAA(PH)
+AAAAA(dissolved_o2)
+AAAAA(gauge_height)
+AAAAA(year)
+AAAAA(month)
+AAAAA(day)
+AAAAA(hour)
+AAAAA(minute)
+
 for number in range(len(dates)):
     tempList = []
     tempList.append(year)
@@ -54,8 +78,6 @@ for number in range(len(dates)):
     tempList.append(PH)
     tempList.append(dissolved_o2)
     riverData.append(tempList)
-
-riverData = np.array(riverData)
 
 river_model = tf.keras.Sequential([
   layers.Dense(64),
